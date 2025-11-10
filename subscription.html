@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streamify - Subscription</title>
+  <link rel="stylesheet" href="style.css">
+  
+</head>
+
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <div class="logo" style="display:flex;align-items:center;gap:10px;">
+      <span style="font-weight:600;color:#ff00aa;">Streamify</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="playlists.html">Playlist</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="accounts.html">Account</a></li>
+    </ul>
+  </nav>
+
+  <!-- MAIN CONTENT -->
+  <div class="subscription-container" style="padding:60px 20px; text-align:center;">
+    <h2 style="margin-bottom:10px;">🎧 Complete Your Subscription</h2>
+    <p style="color:#aaa; margin-bottom:40px;">Review your plan and choose your payment method.</p>
+
+    <!-- PLAN SUMMARY -->
+    <div class="plan-summary" style="background:#1b1b1b; color:#fff; border-radius:15px; padding:25px; max-width:400px; margin:0 auto 40px auto;">
+      <h3 id="planName">Selected Plan: —</h3>
+      <p id="planDesc" style="color:#bbb;">—</p>
+      <p id="planPrice" style="color:#ff00aa; font-weight:600;">₱—</p>
+    </div>
+
+    <!-- PAYMENT OPTIONS -->
+    <h3 style="margin-bottom:15px;">Choose Payment Method</h3>
+    <div class="payment-options" style="display:flex; justify-content:center; gap:30px; flex-wrap:wrap; margin-bottom:30px;">
+      <div class="payment-card" id="gcashCard">
+        <img src="https://brandlogos.net/wp-content/uploads/2024/01/gcash-logo_brandlogos.net_kiaqh-512x427.png" alt="GCash">
+        <p style="margin-top:10px; color:#fff;">GCash</p>
+      </div>
+
+      <div class="payment-card" id="mayaCard">
+        <img src="https://logodix.com/logo/2206762.png" alt="Maya">
+        <p style="margin-top:10px; color:#fff;">Maya</p>
+      </div>
+    </div>
+
+    <!-- PHONE NUMBER INPUT -->
+    <div id="phoneSection" style="display:none;">
+      <h3 style="color:#fff; margin-bottom:10px;">Enter your mobile number</h3>
+      <div class="phone-input">
+        <span>+63</span>
+        <input 
+          type="text" 
+          id="phoneNumber" 
+          placeholder="9123456789" 
+          maxlength="10" 
+          pattern="[0-9]{10}" 
+          title="Enter 10 digits only"
+        >
+      </div>
+
+      <!-- Confirmation Checkbox -->
+      <div class="confirm-box" id="confirmBox">
+        <label>
+          <input type="checkbox" id="confirmCheckbox">
+          I confirm my mobile number is correct.
+        </label>
+      </div>
+    </div>
+
+    <!-- CONFIRM BUTTON -->
+    <button id="confirmBtn" class="btn-pink" style="padding:12px 30px; border-radius:10px; border:none; cursor:pointer; font-weight:600; background:#ff00aa; color:white; transition:0.3s;">
+      Confirm Payment
+    </button>
+
+    <div style="margin-top:40px;">
+      <a href="accounts.html" style="color:#aaa; text-decoration:none;">⬅ Back to Account</a>
+    </div>
+  </div>
+
+  <script>
+    // Load user data
+    const user = JSON.parse(localStorage.getItem('streamifyUser')) || { subscription: "student" };
+
+    const plans = {
+      student: { name: "Student Plan", price: "₱85", desc: "Discounted ad-free listening for students." },
+      solo: { name: "Solo Plan", price: "₱139", desc: "Ad-free streaming for one account." },
+      duo: { name: "Duo Plan", price: "₱199", desc: "Two premium accounts at a lower price." },
+      family: { name: "Family Plan", price: "₱299", desc: "Up to 6 accounts with family sharing." }
+    };
+
+    const selectedPlan = plans[user.subscription] || plans.student;
+    document.getElementById("planName").textContent = selectedPlan.name;
+    document.getElementById("planDesc").textContent = selectedPlan.desc;
+    document.getElementById("planPrice").textContent = selectedPlan.price;
+
+    const gcashCard = document.getElementById("gcashCard");
+    const mayaCard = document.getElementById("mayaCard");
+    const phoneSection = document.getElementById("phoneSection");
+    const phoneInput = document.getElementById("phoneNumber");
+    const confirmBox = document.getElementById("confirmBox");
+    const confirmCheckbox = document.getElementById("confirmCheckbox");
+
+    function highlight(card) {
+      [gcashCard, mayaCard].forEach(c => c.style.border = "2px solid transparent");
+      card.style.border = "2px solid #ff00aa";
+    }
+
+    gcashCard.addEventListener("click", () => {
+      user.payment = "GCash";
+      phoneSection.style.display = "block";
+      confirmBox.style.display = "block";
+      highlight(gcashCard);
+    });
+
+    mayaCard.addEventListener("click", () => {
+      user.payment = "Maya";
+      phoneSection.style.display = "block";
+      confirmBox.style.display = "block";
+      highlight(mayaCard);
+    });
+
+    document.getElementById("confirmBtn").addEventListener("click", () => {
+      const phone = phoneInput.value.trim();
+
+      if (!user.payment) {
+        alert("⚠ Please choose a payment method first.");
+        return;
+      }
+      if (!/^[0-9]{10}$/.test(phone)) {
+        alert("⚠ Please enter a valid 10-digit mobile number (e.g. 9123456789).");
+        return;
+      }
+      if (!confirmCheckbox.checked) {
+        alert("⚠ Please confirm that your mobile number is correct before proceeding.");
+        return;
+      }
+
+      localStorage.setItem("streamifyUser", JSON.stringify({ ...user, phone: "+63" + phone }));
+
+      alert(`✅ Subscription confirmed!\n\nPlan: ${selectedPlan.name}\nPayment: ${user.payment}\nMobile: +63${phone}`);
+      window.location.href = "homepage.html";
+    });
+  </script>
+</body>
+</html>
