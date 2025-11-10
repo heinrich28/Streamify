@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streamify - Playlists</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo" style="display:flex;align-items:center;gap:10px;">
+      <span style="font-weight:600;color:#ff00aa;">Streamify</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="playlists.html" class="active">Playlist</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="accounts.html">Account</a></li>
+    </ul>
+
+    <div class="search-bar">
+      <input type="text" id="searchPlaylist" placeholder="Search playlists..." />
+    </div>
+  </nav>
+
+  <!-- Main container -->
+  <div class="container">
+    <div class="playlist-header">
+      <h1>Your Playlists</h1>
+      <button id="addPlaylistBtn">+ New Playlist</button>
+    </div>
+
+    <!-- Static Genre Playlists -->
+    <h2 style="margin-top:20px;">🎶 Genre Collections</h2>
+    <div class="playlists-grid" id="staticPlaylists">
+      <div class="playlist-card" onclick="window.location.href='rap.html'">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84c06bf2f63b986a90b48bcd7c" alt="Rap">
+        <h3>🔥 Rap Collection</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='rnb.html'">
+        <img src="https://image-cdn-fa.spotifycdn.com/image/ab67706c0000da84cda10d38cbb1fdf978c9a6ca" alt="R&B">
+        <h3>💖 R&B Grooves</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='pop.html'">
+        <img src="https://i.scdn.co/image/ab67616d00001e0208639dd63bf572339b90435c" alt="Pop">
+        <h3>🎵 Pop Hits</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='kpop.html'">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da842cc3143b16e4ea4efcbd5ffb" alt="K-Pop">
+        <h3>🇰🇷 K-Pop Vibes</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='opm.html'">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da840bb0d4072dd57877c9b7143f" alt="OPM">
+        <h3>🇵🇭 OPM Classics</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='hiphop.html'">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da84e0dde9927468d3daa5df416f" alt="Hip-Hop">
+        <h3>🎤 Hip-Hop Hits</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='lovesongs.html'">
+        <img src="https://image-cdn-ak.spotifycdn.com/image/ab67706c0000da843365cbddfe0e30d92fd85427" alt="Love Songs">
+        <h3>💘 Love Songs</h3>
+      </div>
+
+      <div class="playlist-card" onclick="window.location.href='edm.html'">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpTuSw7KmiQsxUUufGCwbFkmiGKsJHJ5y93A&s" alt="EDM">
+        <h3>⚡ EDM Bangers</h3>
+      </div>
+    </div>
+
+    <!-- User Playlists Section -->
+    <h2 style="margin-top:30px;">🧠 Your Custom Playlists</h2>
+    <div class="playlists-grid" id="playlistsContainer"></div>
+  </div>
+
+  <!-- Music Player -->
+  <div class="music-player">
+    <div class="player-content">
+      <div class="now-section">
+        <img id="albumCover" src="https://via.placeholder.com/60" alt="Album Cover" />
+        <div>
+          <p id="nowPlaying">Now Playing: None</p>
+          <p id="artistName" style="font-size:0.9rem; color:#bbb;">—</p>
+        </div>
+      </div>
+
+      <div class="controls">
+        <button id="prevBtn">⏮️</button>
+        <button id="playPauseBtn">▶️</button>
+        <button id="nextBtn">⏭️</button>
+        <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1" style="flex:1; margin:0 10px;">
+        <div class="volume-container" style="display:flex; align-items:center; gap:8px; margin-left:10px;">
+          <span id="volumeIcon" style="font-size:1.2rem; cursor:pointer;">🔊</span>
+          <input type="range" id="volumeControl" value="100" min="0" max="100" step="1" style="width:100px;">
+        </div>
+        <button id="likeBtn" style="font-size:1.2rem; margin-left:10px; cursor:pointer;">🤍</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JS Section -->
+  <script>
+    const playlistsContainer = document.getElementById('playlistsContainer');
+    const addPlaylistBtn = document.getElementById('addPlaylistBtn');
+    const searchPlaylist = document.getElementById('searchPlaylist');
+
+    // Load or create playlists
+    let playlists = JSON.parse(localStorage.getItem('streamifyPlaylists')) || [
+      { name: 'Workout Mix', cover: 'https://i.imgur.com/z3qZQYq.jpg', page: 'workout.html' },
+      { name: 'Chill Vibes', cover: 'https://i.imgur.com/TEXWZqZ.jpg', page: 'chillvibes.html' },
+      { name: 'Top Hits', cover: 'https://i.imgur.com/mqX3L4X.jpg', page: 'tophits.html' }
+    ];
+
+    function renderPlaylists(filter = '') {
+      playlistsContainer.innerHTML = '';
+      playlists
+        .filter(p => p.name.toLowerCase().includes(filter.toLowerCase()))
+        .forEach((playlist, index) => {
+          const card = document.createElement('div');
+          card.classList.add('playlist-card');
+
+          const img = document.createElement('img');
+          img.src = playlist.cover || 'https://via.placeholder.com/200x160/3c096c/ffffff?text=Playlist';
+
+          const title = document.createElement('h3');
+          title.textContent = playlist.name;
+
+          const delBtn = document.createElement('button');
+          delBtn.innerHTML = '🗑️';
+          delBtn.classList.add('delete-btn');
+          delBtn.onclick = (e) => {
+            e.stopPropagation();
+            deletePlaylist(index);
+          };
+
+          card.appendChild(img);
+          card.appendChild(title);
+          card.appendChild(delBtn);
+
+          card.onclick = () => {
+            if (playlist.page) window.location.href = playlist.page;
+            else window.location.href = `playlist-view.html?id=${index}`;
+          };
+
+          playlistsContainer.appendChild(card);
+        });
+
+      localStorage.setItem('streamifyPlaylists', JSON.stringify(playlists));
+    }
+
+    // Add playlist
+    addPlaylistBtn.onclick = () => {
+      const newName = prompt('Enter playlist name:');
+      if (newName && newName.trim() !== '') {
+        playlists.push({
+          name: newName.trim(),
+          cover: 'https://via.placeholder.com/200x160/5a189a/ffffff?text=' + encodeURIComponent(newName.trim())
+        });
+        renderPlaylists();
+      }
+    };
+
+    // Delete playlist
+    function deletePlaylist(index) {
+      if (confirm(`Delete playlist "${playlists[index].name}"?`)) {
+        playlists.splice(index, 1);
+        renderPlaylists();
+      }
+    }
+
+    // Search feature
+    searchPlaylist.addEventListener('input', (e) => {
+      renderPlaylists(e.target.value);
+    });
+
+    // Initial render
+    renderPlaylists();
+  </script>
+</body>
+</html>

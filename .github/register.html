@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - Streamify</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #1b0033 0%, #3c096c 100%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+    .register-container {
+      background: #240046;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 320px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    }
+    input {
+      width: 90%;
+      padding: 0.6rem;
+      margin: 0.5rem 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+    }
+    button {
+      padding: 0.6rem 1rem;
+      border-radius: 8px;
+      border: none;
+      background: #ff00aa;
+      color: #fff;
+      cursor: pointer;
+      margin-top: 1rem;
+      font-weight: 500;
+      transition: 0.3s;
+    }
+    button:hover {
+      background: #ff4fc3;
+    }
+    .error {
+      color: #ff6b6b;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .success {
+      color: #4fffaa;
+      font-size: 0.9rem;
+      margin-top: 0.5rem;
+    }
+    .link {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.9rem;
+      color: #bbb;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+    .link:hover {
+      color: #ff00aa;
+    }
+  </style>
+</head>
+<body>
+  <div class="register-container">
+    <h2>Create Account</h2>
+    <input type="text" id="newUsername" placeholder="Username" required>
+    <input type="password" id="newPassword" placeholder="Password" required>
+    <div class="error" id="errorMsg"></div>
+    <div class="success" id="successMsg"></div>
+    <button id="registerBtn">Register</button>
+    <span class="link" id="loginLink">Back to Login</span>
+  </div>
+
+  <script>
+    const registerBtn = document.getElementById("registerBtn");
+    const errorMsg = document.getElementById("errorMsg");
+    const successMsg = document.getElementById("successMsg");
+    const loginLink = document.getElementById("loginLink");
+
+    registerBtn.addEventListener("click", () => {
+      const username = document.getElementById("newUsername").value.trim();
+      const password = document.getElementById("newPassword").value.trim();
+
+      if (!username || !password) {
+        errorMsg.textContent = "Please fill in all fields!";
+        return;
+      }
+
+      let users = JSON.parse(localStorage.getItem("streamifyUsers")) || [];
+      if (users.some(u => u.username === username)) {
+        errorMsg.textContent = "Username already exists!";
+        return;
+      }
+
+      users.push({ username, password });
+      localStorage.setItem("streamifyUsers", JSON.stringify(users));
+      successMsg.textContent = "Account created successfully!";
+      errorMsg.textContent = "";
+
+      setTimeout(() => {
+        window.location.href = "login.html";
+      }, 1200);
+    });
+
+    loginLink.addEventListener("click", () => {
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>

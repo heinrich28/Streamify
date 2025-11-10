@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Streamify - RnB</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo" style="display:flex;align-items:center;gap:10px;">
+      <span style="font-weight:600;color:#ff00aa;">Streamify</span>
+    </div>
+
+    <ul class="nav-links">
+      <li><a href="homepage.html">Home</a></li>
+      <li><a href="browse.html">Browse</a></li>
+      <li><a href="playlists.html">Playlist</a></li>
+      <li><a href="favorites.html">Favorites</a></li>
+      <li><a href="accounts.html">Account</a></li>
+    </ul>
+
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="Search songs, artists, or genres..." />
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="container">
+    <h1>💖 R&B Playlist</h1>
+    <div class="song-grid" id="songGrid"></div>
+  </div>
+
+  <!-- Music Player -->
+<div class="music-player">
+  <div class="player-content">
+    <div class="now-section">
+      <img id="albumCover" src="https://via.placeholder.com/60" alt="Album Cover" />
+      <div>
+        <p id="nowPlaying">Now Playing: None</p>
+        <p id="artistName" style="font-size:0.9rem; color:#bbb;">—</p>
+      </div>
+    </div>
+
+    <div class="controls">
+      <button id="prevBtn">⏮️</button>
+      <button id="playPauseBtn">▶️</button>
+      <button id="nextBtn">⏭️</button>
+
+      <!-- Progress Bar -->
+      <input type="range" id="progressBar" value="0" min="0" max="100" step="0.1" style="flex:1; margin:0 10px;">
+
+     <!-- Volume Control -->
+  <div class="volume-container" style="display:flex; align-items:center; gap:8px; margin-left:10px;">
+    <span id="volumeIcon" style="font-size:1.2rem; cursor:pointer;">🔊</span>
+    <input type="range" id="volumeControl" value="100" min="0" max="100" step="1" style="width:100px;">
+  </div>
+
+  <!-- Like Button -->
+  <button id="likeBtn" style="font-size:1.2rem; margin-left:10px; cursor:pointer;">🤍</button>
+
+  </div>
+</div>
+
+  <!-- Page-specific JS -->
+  <script>
+    window.addEventListener("load", () => {
+      if (typeof songs === "undefined") {
+        console.error("❌ songs array not found — make sure script.js is in same folder.");
+        return;
+      }
+
+      const rnbSongs = songs.filter(song => song.genre === "R&B");
+      const songGrid = document.getElementById("songGrid");
+
+      rnbSongs.forEach(song => {
+        const card = document.createElement("div");
+        card.classList.add("song-card");
+        card.innerHTML = `
+          <img src="${song.cover}" alt="${song.title}">
+          <div class="song-info">
+            <h4>${song.title}</h4>
+            <p>${song.artist}</p>
+          </div>
+        `;
+
+        card.addEventListener("click", () => {
+          currentTrackIndex = songs.indexOf(song); // global index in songs array
+          loadTrack(currentTrackIndex);
+          playTrack();
+        });
+
+        songGrid.appendChild(card);
+      });
+    });
+  </script>
+</body>
+</html>

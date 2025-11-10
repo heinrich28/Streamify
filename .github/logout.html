@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Logout - Streamify</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #1b0033 0%, #3c096c 100%);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .logout-container {
+      background-color: #240046;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 20px rgba(255,0,170,0.4);
+    }
+    h2 {
+      margin-bottom: 20px;
+    }
+    button {
+      padding: 0.6rem 1.2rem;
+      border-radius: 8px;
+      border: none;
+      background-color: #ff00aa;
+      color: #fff;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: 0.3s;
+    }
+    button:hover {
+      background-color: #ff4fc3;
+      box-shadow: 0 0 15px rgba(255,0,170,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="logout-container">
+    <h2>Are you sure you want to log out?</h2>
+    <button id="logoutBtn">Logout</button>
+  </div>
+
+  <script>
+    const logoutBtn = document.getElementById("logoutBtn");
+
+    logoutBtn.addEventListener("click", () => {
+      // Remove user data from localStorage
+      localStorage.removeItem("streamifyUser");
+      // Redirect to login page
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+</html>
