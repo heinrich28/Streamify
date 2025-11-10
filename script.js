@@ -1,17 +1,17 @@
 // 🎧 Global Song List — accessible to all pages
 window.songs = [
   // ===== Real Songs (1–11) =====
-  { title: "GTA Pinas", artist: "Bugoy na Koykoy", file: "music/Bugoy na Koykoy - GTA Pinas.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273f0d2aa653a383225ed7c5ed7", favorite: true, genre: "Rap" },
-  { title: "No", artist: "Bugoy na Koykoy", file: "music/Bugoy na Koykoy - No.mp3", cover: "https://i.scdn.co/image/ab67616d00001e02227d47214349b584340456cf", favorite: true, genre: "Rap" },
-  { title: "Benta Bounce", artist: "Bugoy na Koykoy", file: "music/Bugoy na Koykoy - Benta Bounce.mp3", cover: "https://i.scdn.co/image/ab67616d0000b2733bd64aadecd312f3314e8ea5", favorite: true, genre: "Rap" },
-  { title: "U Lost", artist: "Supa Fly", file: "music/SUPAFLY - U lost.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273215294c3f78b49fabc921483", favorite: true, genre: "Hip-hop" },
-  { title: "Gangsta Baby", artist: "HELLMERRY ft. Baby G", file: "music/HELLMERRY, Baby G.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273780560af566ebfb863fdfe8d", favorite: true, genre: "Hip-hop" },
-  { title: "City Girl", artist: "Shanti Dope", file: "music/Shanti Dope - City Girl.mp3", cover: "https://i.scdn.co/image/ab67616d00001e023f6b45e30d5bd3906e2df44e", favorite: true, genre: "OPM" },
-  { title: "Dynamite", artist: "BTS", file: "music/BTS - Dynamite.mp3", cover: "https://i.scdn.co/image/ab67616d00001e02755995e9ff2b1b0c753f5eb8", favorite: false, genre: "K-pop" },
-  { title: "Peaches", artist: "Justin Bieber ft. Daniel Caesar, Giveon", file: "music/Justin Bieber - Peaches.mp3", cover: "https://i.scdn.co/image/ab67616d00001e02e6f407c7f3a0ec98845e4431", favorite: false, genre: "Pop" },
-  { title: "One Kiss", artist: "Dua Lipa", file: "music/Calvin Harris, Dua Lipa - One Kiss.mp3", cover: "https://i.scdn.co/image/ab67616d00001e023ce13931214f0c268b588352", favorite: false, genre: "Pop" },
-  { title: "Binibini", artist: "Zack Tabudlo", file: "music/Zack Tabudlo - Binibini.mp3", cover: "https://i.scdn.co/image/ab67616d0000b27316597b9b39bb83ede8504efa", favorite: false, genre: "OPM" },
-  { title: "All I Have", artist: "Jennifer Lopez", file: "music/Jennifer Lopez - All I Have.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273c0d17a37386e6891cc4d8877", favorite: true, genre: "R&B" },
+  { title: "GTA Pinas", artist: "Bugoy na Koykoy", file: "Bugoy na Koykoy - GTA Pinas.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273f0d2aa653a383225ed7c5ed7", favorite: true, genre: "Rap" },
+  { title: "No", artist: "Bugoy na Koykoy", file: "Bugoy na Koykoy - No.mp3", cover: "https://i.scdn.co/image/ab67616d00001e02227d47214349b584340456cf", favorite: true, genre: "Rap" },
+  { title: "Benta Bounce", artist: "Bugoy na Koykoy", file: "Bugoy na Koykoy - Benta Bounce.mp3", cover: "https://i.scdn.co/image/ab67616d0000b2733bd64aadecd312f3314e8ea5", favorite: true, genre: "Rap" },
+  { title: "U Lost", artist: "Supa Fly", file: "SUPAFLY - U lost.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273215294c3f78b49fabc921483", favorite: true, genre: "Hip-hop" },
+  { title: "Gangsta Baby", artist: "HELLMERRY ft. Baby G", file: "HELLMERRY, Baby G.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273780560af566ebfb863fdfe8d", favorite: true, genre: "Hip-hop" },
+  { title: "City Girl", artist: "Shanti Dope", file: "Shanti Dope - City Girl.mp3", cover: "https://i.scdn.co/image/ab67616d00001e023f6b45e30d5bd3906e2df44e", favorite: true, genre: "OPM" },
+  { title: "Dynamite", artist: "BTS", file: "BTS - Dynamite.mp3", cover: "https://i.scdn.co/image/ab67616d00001e02755995e9ff2b1b0c753f5eb8", favorite: false, genre: "K-pop" },
+  { title: "Peaches", artist: "Justin Bieber ft. Daniel Caesar, Giveon", file: "Justin Bieber - Peaches.mp3", cover: "https://i.scdn.co/image/ab67616d00001e02e6f407c7f3a0ec98845e4431", favorite: false, genre: "Pop" },
+  { title: "One Kiss", artist: "Dua Lipa", file: "Calvin Harris, Dua Lipa - One Kiss.mp3", cover: "https://i.scdn.co/image/ab67616d00001e023ce13931214f0c268b588352", favorite: false, genre: "Pop" },
+  { title: "Binibini", artist: "Zack Tabudlo", file: "Zack Tabudlo - Binibini.mp3", cover: "https://i.scdn.co/image/ab67616d0000b27316597b9b39bb83ede8504efa", favorite: false, genre: "OPM" },
+  { title: "All I Have", artist: "Jennifer Lopez", file: "Jennifer Lopez - All I Have.mp3", cover: "https://i.scdn.co/image/ab67616d0000b273c0d17a37386e6891cc4d8877", favorite: true, genre: "R&B" },
 
   // Rap (12–16) — placeholders
   { title: "G Wolf", artist: "Flow G", file: "music/G WOLF - FLOW G.mp3", cover: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRUWHr9zKqZJreYYjQCV0-FmVlBn9ITRH5CPg&s", favorite: false, genre: "Rap" },
@@ -409,4 +409,5 @@ if (addSongBtn) {
 
   
 });
+
 
